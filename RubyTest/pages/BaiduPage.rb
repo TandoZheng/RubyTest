@@ -1,9 +1,19 @@
-require "watir"
+require "rubygems"
+require "watir-webdriver"
+require "rspec"
 
-#使用chrome浏览器打开粉笔网
+class BaiduPage
+  def initialize
+    @browser = Watir::Browser.new :chrome
+    @browser.goto("www.baidu.com")
+  end
 
-ie = Watir::Browser.new :chrome
+  def search str
+    @browser.text_field(:name => "q").set(str)
+    @browser.button(:name => "btnK").click
+  end
 
-ie.goto "www.baidu.com"
-
-puts "成功了！"
+  def has_text text
+    @browser.text.should include(text)
+  end
+end
