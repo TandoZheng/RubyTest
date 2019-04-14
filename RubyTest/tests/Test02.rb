@@ -1,0 +1,3 @@
+require 'watir'
+
+Box.new
